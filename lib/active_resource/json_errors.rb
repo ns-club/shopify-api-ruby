@@ -20,6 +20,7 @@ module ActiveResource
 
     def from_hash(messages, save_cache = false)
       clear unless save_cache
+      return if messages.blank?
 
       messages.each do |key, errors|
         errors.each do |error|
