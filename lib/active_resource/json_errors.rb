@@ -22,7 +22,10 @@ module ActiveResource
       clear unless save_cache
       return if messages.blank?
 
+      Rails.logger.info "messages:#{messages}"
       messages.each do |key, errors|
+        next if errors.blank?
+
         errors.each do |error|
           add(key, error)
         end
