@@ -10,6 +10,8 @@ module ActiveResource
         rescue
           {}
         end
+      
+      Rails.logger.info "json:#{json}" unless data.blank?
       case data
       when String
         from_string(data, save_cache)
