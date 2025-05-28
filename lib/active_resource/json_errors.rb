@@ -15,6 +15,8 @@ module ActiveResource
       case data
       when String
         from_string(data, save_cache)
+      when Array
+        from_array(data, save_cache)
       else
         from_hash(data, save_cache)
       end
@@ -32,6 +34,13 @@ module ActiveResource
           add(key, error)
         end
       end
+    end
+
+    def from_array(errors, save_cache = false)
+      clear unless save_cache
+      return if errors.blank?
+
+      add(:base, errors.join(', '))
     end
 
     def from_string(error, save_cache = false)
